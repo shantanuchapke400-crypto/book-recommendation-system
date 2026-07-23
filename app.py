@@ -46,40 +46,6 @@ class Recommendation:
 
     def recommend_books(self, book_name):
         try:
-            import os
-
-            # ==========================
-            # DEBUG INFORMATION
-            # ==========================
-            st.write("### 🔍 Debug Information")
-            st.write("Current Working Directory:", os.getcwd())
-            st.write("Model Path:", self.recommendation_config.trained_model_path)
-            st.write("Model Exists:", os.path.exists(self.recommendation_config.trained_model_path))
-
-            if os.path.exists("artifacts"):
-                st.write("Artifacts Folder:", os.listdir("artifacts"))
-            else:
-                st.write("❌ artifacts folder NOT found")
-
-            if os.path.exists("artifacts/trained_model"):
-                st.write(
-                    "trained_model Folder:",
-                    os.listdir("artifacts/trained_model")
-                )
-            else:
-                st.write("❌ trained_model folder NOT found")
-
-            if os.path.exists("artifacts/serialized_objects"):
-                st.write(
-                    "serialized_objects Folder:",
-                    os.listdir("artifacts/serialized_objects")
-                )
-            else:
-                st.write("❌ serialized_objects folder NOT found")
-
-            # ==========================
-            # ORIGINAL RECOMMENDATION CODE
-            # ==========================
             books_list = []
 
             model = pickle.load(
@@ -104,8 +70,7 @@ class Recommendation:
 
             return books_list, poster_url
 
-        except Exception as e:
-            st.error(f"❌ Error: {e}")
+        except Exception as e:                        
             raise AppException(e, sys) from e
 
     def train_pipeline(self):
