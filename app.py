@@ -7,7 +7,6 @@ from Books_recommendor.logger.log import logging
 from Books_recommendor.config.configuration import AppConfiguration
 from Books_recommendor.pipeline.training_pipeline import TrainingPipeline
 from Books_recommendor.exception.exception_handler import AppException
-# from Books_recommendor.entity.config_entity import ModelRecommendationConfig
 
 
 class Recommendation:
@@ -45,23 +44,69 @@ class Recommendation:
             raise AppException(e, sys) from e
         
 
-    def recommend_books(self,book_name):
+    def recommend_books(self, book_name):
         try:
+            import os
+
+            # ==========================
+            # DEBUG INFORMATION
+            # ==========================
+            st.write("### 🔍 Debug Information")
+            st.write("Current Working Directory:", os.getcwd())
+            st.write("Model Path:", self.recommendation_config.trained_model_path)
+            st.write("Model Exists:", os.path.exists(self.recommendation_config.trained_model_path))
+
+            if os.path.exists("artifacts"):
+                st.write("Artifacts Folder:", os.listdir("artifacts"))
+            else:
+                st.write("❌ artifacts folder NOT found")
+
+            if os.path.exists("artifacts/trained_model"):
+                st.write(
+                    "trained_model Folder:",
+                    os.listdir("artifacts/trained_model")
+                )
+            else:
+                st.write("❌ trained_model folder NOT found")
+
+            if os.path.exists("artifacts/serialized_objects"):
+                st.write(
+                    "serialized_objects Folder:",
+                    os.listdir("artifacts/serialized_objects")
+                )
+            else:
+                st.write("❌ serialized_objects folder NOT found")
+
+            # ==========================
+            # ORIGINAL RECOMMENDATION CODE
+            # ==========================
             books_list = []
-            model = pickle.load(open(self.recommendation_config.trained_model_path, 'rb'))
-            book_pivot = pickle.load(open(self.recommendation_config.book_pivot_serialized_objects, 'rb'))
+
+            model = pickle.load(
+                open(self.recommendation_config.trained_model_path, "rb")
+            )
+
+            book_pivot = pickle.load(
+                open(self.recommendation_config.book_pivot_serialized_objects, "rb")
+            )
+
             book_id = np.where(book_pivot.index == book_name)[0][0]
-            distance, suggestion = model.kneighbors(book_pivot.iloc[book_id,:].values.reshape(1, -1), n_neighbors = 6)
+
+            distance, suggestion = model.kneighbors(
+                book_pivot.iloc[book_id, :].values.reshape(1, -1),
+                n_neighbors=6
+            )
 
             poster_url = self.fetch_poster(suggestion)
 
             for i in suggestion[0]:
                 books_list.append(book_pivot.index[i])
+
             return books_list, poster_url
 
         except Exception as e:
-            raise AppException(e, sys) from e 
-
+            st.error(f"❌ Error: {e}")
+            raise AppException(e, sys) from e
 
     def train_pipeline(self):
         try:
