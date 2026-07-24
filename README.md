@@ -1,42 +1,87 @@
 # 📚 Book Recommendation System
 
-A machine learning-powered Book Recommendation System built using **Python**, **Scikit-Learn**, and **Streamlit**. The application recommends books similar to the user's selection using a collaborative filtering approach and presents the recommendations through an interactive web interface.
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-FF4B4B?logo=streamlit)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine_Learning-F7931E?logo=scikitlearn)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker)
+![Render](https://img.shields.io/badge/Render-Deployed-46E3B7?logo=render)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+</p>
+
+A production-style **Machine Learning Book Recommendation System** that recommends books similar to the user's selection using **Collaborative Filtering with K-Nearest Neighbors (KNN)**.
+
+The application provides an interactive **Streamlit** web interface, displays book cover images, and is fully containerized using **Docker** for cloud deployment on **Render**.
 
 ---
 
-## 🚀 Features
+# 🌐 Live Demo
 
-- Recommend books similar to the selected title
-- Interactive Streamlit web application
-- Machine Learning-based recommendation engine
-- Clean and modular project structure
-- Docker support for easy deployment
-- Ready for cloud deployment (Render/AWS)
+### 🚀 Try the application
 
----
+**https://book-recommendation-system-hc8l.onrender.com/**
 
-## 🛠️ Tech Stack
-
-- Python
-- Pandas
-- NumPy
-- Scikit-Learn
-- Streamlit
-- Pickle
-- Docker
+> **Note**
+>
+> The application is hosted on the Render Free Plan.
+> If the application has been inactive, the first request may take around **30–60 seconds** while the server starts.
 
 ---
 
-## 📂 Project Structure
+# ✨ Features
+
+- 📚 Recommend similar books using Machine Learning
+- 🧠 Collaborative Filtering with K-Nearest Neighbors (KNN)
+- 🖼️ Displays book cover images
+- 🎯 Interactive Streamlit web interface
+- 📦 Modular project architecture
+- 🐳 Dockerized application
+- ☁️ Cloud deployment on Render
+- ⚙️ Configuration-driven project structure
+
+---
+
+# 🛠️ Tech Stack
+
+| Category | Technologies |
+|-----------|--------------|
+| Language | Python |
+| Machine Learning | Scikit-Learn |
+| Data Processing | Pandas, NumPy |
+| Web Framework | Streamlit |
+| Model Serialization | Pickle |
+| Containerization | Docker |
+| Deployment | Render |
+| Version Control | Git & GitHub |
+
+---
+
+# 📂 Project Structure
 
 ```text
-Book-Recommender/
+book-recommendation-system/
 │
-├── Books_recommendor/        # Source code
-├── artifacts/                # Processed datasets & trained model
-├── config/                   # Configuration files
-├── notebook/                 # Research & experimentation
-├── app.py                    # Streamlit application
+├── Books_recommendor/
+│   ├── components/
+│   ├── config/
+│   ├── constants/
+│   ├── entity/
+│   ├── exception/
+│   ├── logger/
+│   ├── pipeline/
+│   └── utils/
+│
+├── artifacts/
+│   ├── serialized_objects/
+│   └── trained_model/
+│
+├── config/
+├── notebook/
+├── templates/
+│
+├── app.py
 ├── Dockerfile
 ├── requirements.txt
 ├── setup.py
@@ -47,9 +92,34 @@ Book-Recommender/
 
 ---
 
-## ⚙️ Installation
+# 🧠 How It Works
 
-### Clone the repository
+1. The user selects a book from the Streamlit interface.
+2. The trained K-Nearest Neighbors model is loaded.
+3. The selected book is converted into its feature representation.
+4. The recommendation engine finds the nearest similar books.
+5. Book cover URLs are retrieved.
+6. Recommended books and their cover images are displayed.
+
+---
+
+# 📊 Dataset
+
+This project is built using the **Book-Crossing Dataset**.
+
+The dataset contains:
+
+- 📚 Book Information
+- ⭐ User Ratings
+- 👤 User Details
+
+The recommendation model is trained using collaborative filtering based on user rating patterns.
+
+---
+
+# 🚀 Installation
+
+## Clone the Repository
 
 ```bash
 git clone https://github.com/shantanuchapke400-crypto/book-recommendation-system.git
@@ -57,13 +127,15 @@ git clone https://github.com/shantanuchapke400-crypto/book-recommendation-system
 cd book-recommendation-system
 ```
 
-### Create a virtual environment
+---
+
+## Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate the environment
+### Activate
 
 **Windows**
 
@@ -77,7 +149,9 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-### Install dependencies
+---
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -85,13 +159,13 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Run the Application
+## Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
-Open your browser:
+Open:
 
 ```
 http://localhost:8501
@@ -99,75 +173,126 @@ http://localhost:8501
 
 ---
 
-## 🐳 Run with Docker
+# 🐳 Docker
 
-Build the Docker image
-
-```bash
-docker build -t book-recommender .
-```
-
-Run the container
+## Build Docker Image
 
 ```bash
-docker run -p 8501:8501 book-recommender
+docker build -t book-recommendation-system .
+```
+
+## Run Container
+
+```bash
+docker run -p 8501:8501 book-recommendation-system
 ```
 
 ---
 
-## 🧠 How It Works
+# ☁️ Deployment
 
-1. User selects a book.
-2. The recommendation engine searches for similar books.
-3. Top recommendations are retrieved using the trained similarity model.
-4. Recommended books and their cover images are displayed in the Streamlit interface.
+The application is deployed on **Render** using Docker.
 
----
+Deployment workflow:
 
-## 📸 Screenshots
-
-### 🏠 Home Page
-
-The main interface where users can train the recommendation model, select a book from the dropdown, and generate personalized recommendations.
-
-![Home Page](screenshots/home-page.png)
-
-### 📖 Recommendation Results
-
-Example of the recommendation engine displaying books similar to the selected title along with their cover images.
-
-![Recommendation Results](screenshots/recommendation-results.png)
+```
+GitHub
+      │
+      ▼
+Docker Image
+      │
+      ▼
+Render
+      │
+      ▼
+Live Web Application
+```
 
 ---
 
-## 🔮 Future Improvements
+# 📸 Screenshots
 
-- User authentication
-- Hybrid recommendation system
-- Personalized recommendations
-- Book ratings and reviews
-- Advanced search & filtering
-- REST API using FastAPI/Flask
-- CI/CD pipeline
-- Cloud deployment
+## Home Page
+
+> Add your application home page screenshot here.
+
+```
+screenshots/home-page.png
+```
 
 ---
 
-## 📜 License
+## Recommendation Results
+
+> Add recommendation output screenshot here.
+
+```
+screenshots/recommendation-results.png
+```
+
+---
+
+# 📚 What I Learned
+
+Building this project helped me gain practical experience in:
+
+- Machine Learning Recommendation Systems
+- Collaborative Filtering
+- K-Nearest Neighbors
+- Model Serialization
+- Streamlit Application Development
+- Docker Containerization
+- Cloud Deployment using Render
+- Project Structure & Configuration Management
+- Debugging Production Deployment Issues
+
+---
+
+# 🔮 Future Improvements
+
+- User Authentication
+- Personalized User Profiles
+- Hybrid Recommendation System
+- Content-Based Recommendation
+- REST API using FastAPI
+- Database Integration
+- Recommendation History
+- CI/CD Pipeline
+- Kubernetes Deployment
+
+---
+
+# 🤝 Contributing
+
+Contributions, suggestions, and improvements are always welcome.
+
+Feel free to fork the repository, open an issue, or submit a pull request.
+
+---
+
+# 👨‍💻 Author
+
+**Shantanu Chapke**
+
+📧 Email:
+shantanuchapke400@gmail.com
+
+🐙 GitHub:
+https://github.com/shantanuchapke400-crypto
+
+💼 LinkedIn:
+https://www.linkedin.com/in/shantanu-chapke-38038a375
+
+---
+
+# 📜 License
 
 This project is licensed under the **MIT License**.
 
 ---
 
-## 👨‍💻 Author
+## ⭐ Support
 
-**Shantanu Chapke**
+If you found this project helpful, consider giving it a **Star ⭐** on GitHub.
 
-📧 Email: shantanuchapke400@gmail.com
-
-🐙 GitHub: https://github.com/shantanuchapke400-crypto
-
-💼 LinkedIn: https://www.linkedin.com/in/shantanu-chapke-38038a375
----
-
-⭐ If you found this project helpful, consider giving it a star on GitHub!
+It helps support the project and motivates future development.
