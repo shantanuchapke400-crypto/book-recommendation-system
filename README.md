@@ -212,25 +212,23 @@ Live Web Application
 
 # 📸 Screenshots
 
-## Home Page
+## 🏠 Home Page
 
-> Add your application home page screenshot here.
+The main interface where users can select a book and generate recommendations.
 
-```
-screenshots/home-page.png
-```
-
----
-
-## Recommendation Results
-
-> Add recommendation output screenshot here.
-
-```
-screenshots/recommendation-results.png
-```
+<p align="center">
+  <img src="screenshots/home-page.png" alt="Home Page" width="900">
+</p>
 
 ---
+
+## 📖 Recommendation Results
+
+The recommendation engine displaying similar books along with their cover images.
+
+<p align="center">
+  <img src="screenshots/recommendation-results.png" alt="Recommendation Results" width="900">
+</p>
 
 # 📚 What I Learned
 
